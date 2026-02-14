@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Our Love Story ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- GLOBAL ---------- */
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+  text-align:center;
+  background:linear-gradient(135deg,#fff0f5,#ffe6ee);
+  animation:bgZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgZoom{
+  from{background-size:100%;}
+  to{background-size:110%;}
+}
+
+/* ---------- FLOATING HEARTS ---------- */
+.floating-hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+.heart{
+  position:absolute;
+  bottom:-40px;
+  color:#ff4d88;
+  opacity:.45;
+  animation:rise linear infinite;
+}
+
+@keyframes rise{
+  0%{
+    transform:translateY(0) scale(1);
+    opacity:.5;
+  }
+  100%{
+    transform:translateY(-110vh) translateX(25px) scale(1.5);
+    opacity:0;
+  }
+}
+
+/* ---------- PAGE (CENTERED PERFECTLY) ---------- */
+.page{
+  display:none;
+  min-height:100vh;
+
+  /* CENTER EVERYTHING */
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  padding:30px 20px;
+  position:relative;
+  z-index:1;
+  animation:fade .8s ease;
+}
+
+.page.active{
+  display:flex;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(25px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ---------- TITLE ---------- */
+.title{
+  font-family:'Great Vibes',cursive;
+  font-size:5rem;
+  color:#d72660;
+  text-shadow:0 0 20px rgba(215,38,96,0.25);
+  margin-bottom:10px;
+}
+
+.subtitle{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  margin-bottom:20px;
+}
+
+/* ---------- GLASS CARD ---------- */
+.glass{
+  width:min(520px,90%);
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(12px);
+  padding:30px;
+  border-radius:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+/* ---------- BUTTON ---------- */
+button{
+  background:#d72660;
+  color:white;
+  border:none;
+  padding:12px 26px;
+  border-radius:30px;
+  cursor:pointer;
+  margin-top:15px;
+  transition:.3s;
+  font-size:15px;
+}
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(215,38,96,.35);
+}
+
+.back{
+  position:absolute;
+  top:70px;
+  left:20px;
+  background:#444;
+}
+
+/* ---------- INPUT ---------- */
+input{
+  padding:10px;
+  width:230px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+/* ---------- VALENTINE PHOTO ---------- */
+/* ---------- VALENTINE CARD ---------- */
+.valentine-card{
+  position:relative;
+  overflow:hidden;
+  min-height:280px;
+}
+
+.valentine-img{
+  display:block;
+  margin:15px auto;
+  width:220px;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+
+/* buttons */
+.valentine-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px;
+}
+
+/* smooth moving NO button */
+#noBtn{
+  background:#444;
+  position:absolute;
+  left:60%;
+  top:80%;
+  transform:translate(-50%,-50%);
+  transition:all 0.45s ease;   /* CINEMATIC SMOOTH */
+}
+
+
+/* ---------- TIMELINE ---------- */
+.timeline .card{
+  background:white;
+  width:min(600px,90%);
+  margin:10px auto;
+  padding:14px;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+/* ---------- GALLERY ---------- */
+/* ---------- BOOK STYLE GALLERY ---------- */
+
+.book-title{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  margin-bottom:20px;
+  color:#d72660;
+}
+
+/* whole book */
+.book{
+  width:min(1000px,95%);
+  display:flex;
+  justify-content:center;
+  gap:0;
+  perspective:1200px;
+}
+
+/* pages */
+.book-page{
+  width:50%;
+  background:#fff;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+/* left page curve */
+.book-page.left{
+  border-radius:15px 0 0 15px;
+  transform:rotateY(2deg);
+}
+
+/* right page curve */
+.book-page.right{
+  border-radius:0 15px 15px 0;
+  transform:rotateY(-2deg);
+}
+
+/* center fold shadow */
+.book::before{
+  content:"";
+  width:20px;
+  background:linear-gradient(to right,
+      rgba(0,0,0,.15),
+      rgba(0,0,0,0));
+}
+
+/* photo cards */
+.photo-card{
+  background:#fffafc;
+  border-radius:12px;
+  padding:10px;
+  box-shadow:0 6px 12px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.photo-card:hover{
+  transform:translateY(-4px);
+}
+
+.photo-card img{
+  width:100%;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.photo-card p{
+  margin-top:8px;
+  font-size:14px;
+  color:#444;
+}
+
+
+
+/* ---------- POPUP ---------- */
+#popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+#popup img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="floating-hearts"></div>
+
+<!-- INTRO -->
+<section id="intro" class="page active">
+  <h1 class="title">Our Love Story</h1>
+  <p id="typing" class="subtitle"></p>
+  <button onclick="nextPage('login')">Start the Journey ✨</button>
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="page">
+  <button class="back" onclick="nextPage('intro')">← Back</button>
+  <div class="glass">
+    <h2>What do I call you? 💌</h2>
+    <input id="nickname" placeholder="Enter nickname"><br>
+    <button onclick="saveName()">Continue</button>
+  </div>
+</section>
+
+<!-- VALENTINE -->
+<section id="valentine" class="page">
+  <button class="back" onclick="nextPage('login')">← Back</button>
+
+  <div class="glass valentine-card">
+    <h2 id="nameText"></h2>
+    <p>Will you be my forever Valentine? ❤️</p>
+
+    <!-- CENTER PHOTO -->
+    <img src="ChatGPT Image Feb 13, 2026, 12_23_54 PM.png" class="valentine-img">
+
+    <!-- BUTTONS -->
+    <div class="valentine-buttons">
+      <button onclick="yesLove()">Absolutely 💖</button>
+      <button id="noBtn">No 😜</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- LOVE STORY -->
+<section id="fall" class="page">
+  <button class="back" onclick="nextPage('valentine')">← Back</button>
+  <div class="glass">
+    <h2>How I Fell in Love</h2>
+    <p>
+      It started with small moments…<br>
+      Your smile stayed in my heart.<br>
+      Slowly you became my happiness.<br>
+      One day, you became my home ❤️
+    </p>
+    <button onclick="nextPage('journey')">Next ➜</button>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="page">
+  <button class="back" onclick="nextPage('fall')">← Back</button>
+  <h2>Our Journey 🕰️</h2>
+  <div class="timeline">
+    <div class="card">☕ Tea shop — our favorite place</div>
+    <div class="card">🙏 Temple blessings together</div>
+    <div class="card">🎬 Theatre laughter</div>
+    <div class="card">🛍️ Mall memories</div>
+    <div class="card">💍 Love became forever</div>
+  </div>
+  <button onclick="nextPage('gallery')">Next ➜</button>
+</section>
+
+<!-- GALLERY -->
+<!-- BOOK STYLE GALLERY -->
+<section id="gallery" class="page">
+  <button class="back" onclick="nextPage('journey')">← Back</button>
+
+  <h2 class="book-title">Our Memory Book 📖</h2>
+
+  <div class="book">
+
+    <!-- LEFT PAGE -->
+    <div class="book-page left">
+      <div class="photo-card">
+        <img src="photo1.jpg" onclick="openPopup(this.src)">
+        <p>Mall date — endless smiles 💕</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo2.jpg" onclick="openPopup(this.src)">
+        <p>Temple blessings together 🙏</p>
+      </div>
+    </div>
+
+    <!-- RIGHT PAGE -->
+    <div class="book-page right">
+      <div class="photo-card">
+        <img src="photo3.jpg" onclick="openPopup(this.src)">
+        <p>Theatre fun night 🎬</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo4.jpg" onclick="openPopup(this.src)">
+        <p>Tea shop talks ☕</p>
+      </div>
+    </div>
+
+  </div>
+
+  <button onclick="nextPage('ending')">Finish Journey 🎬</button>
+</section>
+
+    <!-- Continue same style up to photo25 -->
+
+  </div>
+</section>
+
+<!-- POPUP -->
+<div id="popup" onclick="closePopup()">
+  <img id="popupImg">
+</div>
+
+<script>
+/* ---------- YES BUTTON ACTION ---------- */
+function yesLove(){
+
+  // heart burst animation
+  for(let i=0; i<20; i++){
+    const heart = document.createElement("div");
+    heart.className = "heart-burst";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.top = "80vh";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),1500);
+  }
+
+  // go to next page after effect
+  setTimeout(()=>{
+    nextPage("fall");
+  },700);
+}
+
+
+  /* NO BUTTON MOVES */
+/* ---------- CINEMATIC NO BUTTON ---------- */
+const noBtn = document.getElementById("noBtn");
+
+if(noBtn){
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("touchstart", moveNoButton); // mobile support
+}
+
+function moveNoButton(){
+  const card = document.querySelector(".valentine-card");
+
+  const padding = 20;
+  const maxX = card.clientWidth - noBtn.offsetWidth - padding;
+  const maxY = card.clientHeight - noBtn.offsetHeight - padding;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
+function nextPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function saveName(){
+  let name=document.getElementById("nickname").value || "My Love";
+  document.getElementById("nameText").innerText =
+    name + ", this is for you ❤️";
+  nextPage("valentine");
+}
+
+/* typing */
+const text="Every love story is beautiful, but ours is my favorite.";
+let i=0;
+function typeWriter(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeWriter,60);
+  }
+}
+typeWriter();
+
+/* hearts */
+const container=document.querySelector(".floating-hearts");
+for(let i=0;i<40;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(10+Math.random()*20)+"px";
+  h.style.animationDuration=(6+Math.random()*8)+"s";
+  h.style.animationDelay=Math.random()*5+"s";
+  container.appendChild(h);
+}
+
+/* popup */
+function openPopup(src){
+  document.getElementById("popup").style.display="flex";
+  document.getElementById("popupImg").src=src;
+}
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
